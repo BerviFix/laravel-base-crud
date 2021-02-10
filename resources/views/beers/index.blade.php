@@ -22,6 +22,7 @@
                         <th>Grado alcolico</th>
                         <th>Creato il</th>
                         <th>Aggiornato il</th>
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -35,6 +36,9 @@
                             <td>{{ $beer->content }} %</td>
                             <td>{{ $beer->created_at }}</td>
                             <td>{{ $beer->updated_at }}</td>
+                            <td>
+                                <a href="{{ route('beers.show', ['beer'=> $beer->id]) }}" class="btn btn-outline-light">Mostra</a>
+                            </td>
                         </tr>    
                     @endforeach
                 </tbody>
