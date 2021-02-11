@@ -27,7 +27,7 @@ class BeerController extends Controller
      */
     public function create()
     {
-        //
+        return view('beers.create');
     }
 
     /**
@@ -38,7 +38,15 @@ class BeerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $beer = new Beer();
+        $beer->name = $data['name'];
+        $beer->brand = $data['brand'];
+        $beer->price = $data['price'];
+        $beer->content = $data['content'];
+        $beer->save();
+
+        return redirect()->route('beers.index');
     }
 
     /**
@@ -47,10 +55,11 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Beer $beer)
     {
-        $beer = Beer::find($id);
-        dd($beer);
+        // $beer = Beer::find($id);
+        // dd($beer->getAttributes());
+        return view('beers.show', compact('beer'));
     }
 
     /**
