@@ -40,10 +40,11 @@ class BeerController extends Controller
     {
         $data = $request->all();
         $beer = new Beer();
-        $beer->name = $data['name'];
-        $beer->brand = $data['brand'];
-        $beer->price = $data['price'];
-        $beer->content = $data['content'];
+        // $beer->name = $data['name'];
+        // $beer->brand = $data['brand'];
+        // $beer->price = $data['price'];
+        // $beer->content = $data['content'];
+        $beer->fill($data);
         $beer->save();
 
         return redirect()->route('beers.index');
