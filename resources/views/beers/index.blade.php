@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <table class="table table-dark table-striped table-bordered">
         <thead>
             <tr>
@@ -15,6 +21,8 @@
                 <th>Grado alcolico</th>
                 <th>Creato il</th>
                 <th>Aggiornato il</th>
+                <th></th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -30,7 +38,17 @@
                     <td>{{ $beer->created_at }}</td>
                     <td>{{ $beer->updated_at }}</td>
                     <td>
-                        <a href="{{ route('beers.show', ['beer'=> $beer->id]) }}" class="btn btn-outline-light">Mostra</a>
+                        <a href="{{ route('beers.show',  $beer->id) }}" class="btn btn-outline-light">Mostra</a>
+                    </td>
+                    <td>
+                        <a href="{{ route('beers.edit', $beer->id) }}" class="btn btn-outline-light">Modifica</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('beers.destroy', $beer->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger">Elimina</button>
+                        </form>
                     </td>
                 </tr>    
             @endforeach
